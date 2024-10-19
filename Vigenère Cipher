@@ -1,0 +1,69 @@
+  import java.util.Scanner;
+
+public class VigenèreCipher
+{
+    public static void main(String[] args)
+    {
+      String encrypt;
+      String keyword;
+
+     Scanner keyboard=new Scanner(System.in);
+
+      System.out.print("Enter word for encryption here: ");
+      //converting both strings into Lower case to make use of the ASCII
+      encrypt=keyboard.nextLine().toLowerCase();
+      System.out.print("Enter keyword: ");
+      keyword=keyboard.nextLine().toLowerCase();
+
+
+      String repeatedKeyword = repeatKeyword(encrypt, keyword); // Repeat the keyword
+      System.out.println("Repeated Keyword: " + repeatedKeyword); // Display the repeated keyword
+      String encryptedText = encryptText(encrypt, repeatedKeyword); // Encrypt the text
+      System.out.println("Encrypted Text: " + encryptedText); // Display the encrypted text
+         
+      
+    }
+    public static String repeatKeyword(String encrypt, String keyword)
+    {
+        StringBuilder result = new StringBuilder(); // this creates a new empty instance of the StringBuilder class which does'nt currently contain any charcters
+        int cipherLength = encrypt.length(); // Get the length of the ciphertext
+        
+        // this is creating a loop so that the keyword is repeated until the ciphertext is fully warped 
+        while (result.length()<cipherLength)
+        {
+            result.append(keyword);//This takes the current contents of result (which is empty at this point) and adds the contents of keyword to it.
+        } 
+        // If the result is longer than the ciphertext, trim it
+        if (result.length()>cipherLength)
+        {
+           result.setLength(cipherLength);// Set the length of result to match the ciphertext length
+            return result.toString();
+        } // Return the repeated keyword as a string
+        
+         public static String encryptText(String encrypt, String repeatedKeyword) 
+         {
+            StringBuilder result = new StringBuilder(); // Create a new StringBuilder for the encrypted text
+         
+            for (int i = 0; i < encrypt.length(); i++) 
+            {
+                char currentChar = encrypt.charAt(i);
+
+            // Only encrypt letters, ignore spaces or punctuation
+            if (currentChar >= 'a' && currentChar <= 'z') 
+            
+            {
+                // Calculate shift using the keyword
+                int shift = repeatedKeyword.charAt(i)-'a';  // Determine the shift from the keyword
+                char encryptedChar = (char) ((currentChar - 'a' + shift) % 26 + 'a');  // Shift the current character
+                result.append(encryptedChar);
+                
+            } 
+            else 
+            {
+                // If it's not a letter, add it unchanged (spaces, punctuation)
+                result.append(currentChar);
+            }
+
+        }
+    }
+    }
