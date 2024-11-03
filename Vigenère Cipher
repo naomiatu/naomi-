@@ -1,4 +1,4 @@
-  import java.util.Scanner;
+import java.util.Scanner;
 
 public class VigenèreCipher
 {
@@ -57,7 +57,7 @@ public class VigenèreCipher
          {
            // Calculate shift using the keyword
            int shift = repeatedKeyword.charAt(i)-'a';  // Determine the shift from the keyword
-           char encryptedChar = (char) ((currentChar - 'a' + shift) % 26 + 'a');  // Shift the current character
+           char encryptedChar = (char) ((currentChar - 'a' + shift) % 26 + 'a'+1);  // Shift the current character
            result.append(encryptedChar);  
          
           } 
@@ -65,3 +65,5 @@ public class VigenèreCipher
        }
         return result.toString(); 
     }
+}
+
